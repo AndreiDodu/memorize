@@ -19,7 +19,6 @@ public class TimerThread implements Runnable {
 				this.time++;
 				this.label.setText("Time: " + this.time);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

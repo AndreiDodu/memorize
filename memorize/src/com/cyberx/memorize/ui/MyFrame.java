@@ -102,13 +102,13 @@ public class MyFrame {
 		List<URL> images = new ArrayList<URL>();
 		Random rn = new Random();
 		for (int i = 0; i < 16; i++) {
-				int number = rn.nextInt(imageListCount.keySet().size());
-				URL url = (URL) imageListCount.keySet().toArray()[number];
-				images.add(url);
-				if (imageListCount.get(url) == 1)
-					imageListCount.remove(url);
-				else
-					imageListCount.put(url, 1);
+			int number = rn.nextInt(imageListCount.keySet().size());
+			URL url = (URL) imageListCount.keySet().toArray()[number];
+			images.add(url);
+			if (imageListCount.get(url) == 1)
+				imageListCount.remove(url);
+			else
+				imageListCount.put(url, 1);
 		}
 
 		jlabels.add(lblNewLabel);
@@ -283,10 +283,11 @@ public class MyFrame {
 
 	public void resetIconsOneByOne() {
 		Set<String> processed = new HashSet<String>();
-		int count = 0;
+		List<JLabel> labels = new ArrayList<JLabel>();
 		for (int i = 0; i < jlabels.size(); i++) {
 			JLabel label = jlabels.get(i);
-			if (!label.getIcon().toString().equals(getClass().getResource("./sun.png").toString()) && !processed.contains(label.getIcon().toString())) {
+			if (!label.getIcon().toString().equals(getClass().getResource("./sun.png").toString())
+					&& !processed.contains(label.getIcon().toString())) {
 				processed.add(label.getIcon().toString());
 				boolean trovato = false;
 				for (int j = 0; j < jlabels.size(); j++) {
@@ -297,31 +298,14 @@ public class MyFrame {
 					}
 				}
 				if (trovato == false) {
-					count++;
+					labels.add(label);
 				} else {
 				}
 			}
 		}
-		processed = new HashSet<String>();
-		if (count >= 2) {
-			for (int i = 0; i < jlabels.size(); i++) {
-				JLabel label = jlabels.get(i);
-				if (!label.getIcon().toString().equals(getClass().getResource("./sun.png").toString()) && !processed.contains(label.getIcon().toString())) {
-					processed.add(label.getIcon().toString());
-					boolean trovato = false;
-					for (int j = 0; j < jlabels.size(); j++) {
-						if (j != i) {
-							if (jlabels.get(j).getIcon().toString().equals(label.getIcon().toString())) {
-								trovato = true;
-							}
-						}
-					}
-					if (trovato == false) {
-						label.setIcon(new ImageIcon(getClass().getResource("./sun.png")));
-					} else {
-
-					}
-				}
+		if (labels.size() >= 2) {
+			for (JLabel label : labels) {
+				label.setIcon(new ImageIcon(getClass().getResource("./sun.png")));
 			}
 		}
 
@@ -332,7 +316,8 @@ public class MyFrame {
 		int score = 0;
 		for (int i = 0; i < jlabels.size(); i++) {
 			JLabel label = jlabels.get(i);
-			if (!label.getIcon().toString().equals(getClass().getResource("./sun.png").toString()) && !processed.contains(label.getIcon().toString())) {
+			if (!label.getIcon().toString().equals(getClass().getResource("./sun.png").toString())
+					&& !processed.contains(label.getIcon().toString())) {
 				processed.add(label.getIcon().toString());
 				boolean trovato = false;
 				for (int j = 0; j < jlabels.size(); j++) {
